@@ -20,7 +20,7 @@ body {
 
 /* Header */
 header {
-    background-color: #ff474c;
+    background-color: #06ab42;
     width: 100%;
     box-shadow: 0 2px 2px #1f1f1f;
     z-index: 99;
@@ -61,7 +61,7 @@ a {
 
 /* Navbar */
 nav {
-    background-color: #ff474c;
+    background-color: #06ab42;
     box-shadow: 0 2px 2px #1f1f1f;
     border-bottom-left-radius: 8px;
     /* Do not display by default, display toggled by burger */
@@ -161,7 +161,7 @@ main {
 #what-do-we-help-with {
     box-shadow: 0 0px 8px 2px #1f1f1f;
     z-index: 2;
-    background-color: #ff474c;
+    background-color: #06ab42;
     padding: 5px 0px;
 }
 
@@ -384,7 +384,7 @@ main {
 
 /* Footer */
 footer {
-    background-color: #ff474c;
+    background-color: #06ab42;
     padding: 2px;
     /* Parent flex properties */
     display: flex;
@@ -428,7 +428,7 @@ footer {
         border-radius: 0px;
         display: block;
         color: black;
-        background-color: #ff474c;
+        background-color: #06ab42;
     }
 
     #menu {
