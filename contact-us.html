@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+    content="Help Me Pest Control's contact page to allow for email queries and to show contact information.">
+    <title>Help Me Pest Control</title>
+    <!-- Link to style.css file -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Link to set favicon -->
+    <link rel="icon" href="assets/images/bug-favicon.svg">
+    <!-- Link to Font Awesome icons -->
+    <script src="https://kit.fontawesome.com/cd5674c3b8.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="contact-page">
+    <!-- Page header -->
+    <header>
+        <a href="index.html">
+            <h1 id="logo"><i class="fa-solid fa-bug"></i> Help Me Pest Control</h1>
+        </a>
+        <!-- Burger for mobile users -->
+        <input type="checkbox" id="toggle-navbar" name="toggle-navbar">
+        <label for="toggle-navbar" id="burger" aria-label="Open navbar menu"><i class="fa-solid fa-bars"></i></label>
+        <!-- Navbar -->
+        <nav>
+            <ul id="menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a class="active" href="contact-us.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- Main content -->
+    <main>
+        <!-- Contact options -->
+        <section id="contact-options">
+            <!-- Email query box -->
+            <form action="https://formdump.codeinstitute.net" method="POST" class="contact-boxes" id="query-box">
+                <h2>Email us your query</h2>
+                <br>
+                <label for="user-email">Your Email</label>
+                <input type="email" name="user-email" id="user-email" required>
+                <label for="user-name">Your Full Name</label>
+                <input type="text" name="user-name" id="user-name">
+                <label for="query">Your Query</label>
+                <textarea id="query" name="user-query" required></textarea>
+                <input id="submit" type="submit" value="Submit Query" disabled>
+            </form>
+            <!-- Contact information box -->
+            <div class="contact-boxes" id="contact-information">
+                <h2>Contact Information</h2>
+                <ul>
+                    <li>+91 1234567890</li>
+                    <li>info@gmail.com</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer>
+        <ul id="social-medias">
+            <li class="social-icon">
+                <a href="https://www.facebook.com" target="_blank"
+                    aria-label="See Help Me Pest Control's Facebook page">
+                    <i class="fa-3x fa-brands fa-square-facebook"></i>
+                </a>
+            </li>
+            <li class="social-icon">
+                <a href="https://twitter.com" target="_blank"
+                    aria-label="See Help Me Pest Control's X (Twitter) page">
+                    <i class="fa-3x fa-brands fa-square-x-twitter"></i>
+                </a>
+            </li>
+            <li class="social-icon">
+                <a href="https://www.google.com/"
+                    target="_blank" aria-label="See Help Me Pest Control's X Google page">
+                    <i class="fa-3x fa-brands fa-square-google-plus"></i>
+                </a>
+            </li>
+        </ul>
+    </footer>
+</body>
+
+</html>
