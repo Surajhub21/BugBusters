@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const priceElement = document.querySelector(`[data-service="${serviceType}"] .price`);
         if (priceElement) {
             const currentPrice = prices[serviceType].base;
-            priceElement.textContent = `From £${currentPrice}`;
+            priceElement.textContent = `From ₹${currentPrice}`;
         }
     }
 
