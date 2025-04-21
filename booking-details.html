@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Details - Help Me Pest Control</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="assets/images/bug-favicon.svg">
+    <script src="https://kit.fontawesome.com/cd5674c3b8.js" crossorigin="anonymous"></script>
+    <style>
+        .booking-form-section {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        .submit-btn {
+            background: #4CAF50;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: #45a049;
+        }
+
+        .selected-service {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 2rem;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .selected-service h3 {
+            color: #4CAF50;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <h1 id="logo"><i class="fa-solid fa-bug"></i> Help Me Pest Control</h1>
+        </a>
+        <input type="checkbox" id="toggle-navbar" name="toggle-navbar">
+        <label for="toggle-navbar" id="burger" aria-label="Open navbar menu"><i class="fa-solid fa-bars"></i></label>
+        <nav>
+            <ul id="menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="service-booking.html">Book Service</a></li>
+                <li><a href="contact-us.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="booking-form-section">
+            <h2>Enter Your Details</h2>
+            <div id="selected-service-display" class="selected-service">
+                <h3>Selected Service: <span id="selected-service-text"></span></h3>
+            </div>
+            <form id="booking-details-form">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phNo">Phone Number</label>
+                    <input type="tel" id="phNo" name="phNo" required>
+                </div>
+                <div class="form-group">
+                    <label for="serviceType">Service Type</label>
+                    <select id="serviceType" name="serviceType" required disabled>
+                        <option value="">Select a service</option>
+                        <option value="OneDay">One-Time Treatment</option>
+                        <option value="Monthly">Monthly Plan</option>
+                        <option value="Quarterly">Quarterly Plan</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="pestType">Pest Type</label>
+                    <select id="pestType" name="pestType" required>
+                        <option value="">Select pest type</option>
+                        <option value="Bugs">Bugs</option>
+                        <option value="Rats">Rats</option>
+                        <option value="Moths">Moths</option>
+                        <option value="Bedbugs">Bedbugs</option>
+                        <option value="Fleas">Fleas</option>
+                        <option value="Weevils">Weevils</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <textarea id="address" name="address" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Proceed to Payment</button>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        // Get service type from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const serviceType = urlParams.get('serviceType');
+        
+        // Set the selected service type
+        if (serviceType) {
+            const serviceTypeSelect = document.getElementById('serviceType');
+            const serviceTypeText = document.getElementById('selected-service-text');
+            
+            // Set the value and display text
+            serviceTypeSelect.value = serviceType;
+            serviceTypeText.textContent = serviceTypeSelect.options[serviceTypeSelect.selectedIndex].text;
+        }
+
+        document.getElementById('booking-details-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phNo: document.getElementById('phNo').value,
+                serviceType: document.getElementById('serviceType').value,
+                pestType: document.getElementById('pestType').value,
+                address: document.getElementById('address').value
+            };
+
+            // Store the form data in localStorage
+            localStorage.setItem('bookingData', JSON.stringify(formData));
+            
+            // Redirect to payment page
+            window.location.href = 'payment.html';
+        });
+    </script>
+</body>
+</html> 

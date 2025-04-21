@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Status - Help Me Pest Control</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="assets/images/bug-favicon.svg">
+    <script src="https://kit.fontawesome.com/cd5674c3b8.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: #4CAF50;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #logo {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 1rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        #burger {
+            display: none;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .booking-status-section {
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .booking-status-section h2 {
+            color: #333;
+            margin-bottom: 2rem;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: #45a049;
+            transform: translateX(-5px);
+        }
+
+        .status-card {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+        }
+
+        .status-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        .status-card h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .status-card p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .status-details {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .status-details p {
+            margin: 0.5rem 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: white;
+            color: #4CAF50;
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            #burger {
+                display: block;
+                margin-left: auto;
+            }
+
+            nav {
+                display: none;
+            }
+
+            #toggle-navbar:checked ~ nav {
+                display: block;
+            }
+
+            .status-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .status-icon {
+                font-size: 3rem;
+            }
+
+            .status-card h3 {
+                font-size: 1.8rem;
+            }
+
+            .status-card p {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .status-card {
+                padding: 1.5rem;
+            }
+
+            .status-icon {
+                font-size: 2.5rem;
+            }
+
+            .status-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .status-card p {
+                font-size: 1rem;
+            }
+
+            .status-details p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <h1 id="logo"><i class="fa-solid fa-bug"></i> Help Me Pest Control</h1>
+        </a>
+        <input type="checkbox" id="toggle-navbar" name="toggle-navbar" hidden>
+        <label for="toggle-navbar" id="burger" aria-label="Open navbar menu"><i class="fa-solid fa-bars"></i></label>
+        <nav>
+            <ul id="menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="service-booking.html">Book Service</a></li>
+                <li><a href="contact-us.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="booking-status-section">
+            <a href="index.html" class="back-button">
+                <i class="fa-solid fa-arrow-left"></i> Back to Home
+            </a>
+            <h2>Your Booking Status</h2>
+            <div class="status-card">
+                <div class="status-icon">
+                    <i class="fa-solid fa-clock"></i>
+                </div>
+                <h3>Booking Initiated</h3>
+                <p>Your booking has been received and is being processed.</p>
+                <div class="status-details">
+                    <p><strong>Booking ID:</strong> <span id="booking-id"></span></p>
+                    <p><strong>Status:</strong> <span class="status-badge">Processing</span></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const bookingId = localStorage.getItem('bookingId');
+            if (bookingId) {
+                document.getElementById('booking-id').textContent = bookingId;
+            }
+        });
+    </script>
+</body>
+</html>

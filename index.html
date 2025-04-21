@@ -29,6 +29,11 @@
             <ul id="menu">
                 <li><a class="active" href="index.html">Home</a></li>
                 <li><a href="services.html">Services</a></li>
+                <li><a href="service-booking.html">Book Service</a></li>
+                <li><a href="treatment-plans.html">Treatment Plans</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="pest-reports.html">Pest Reports</a></li>
+                <li><a href="customer-portal.html">Customer Portal</a></li>
                 <li><a href="contact-us.html">Contact Us</a></li>
             </ul>
         </nav>
@@ -57,6 +62,32 @@
                 <a href="services.html#bedbugs">Bedbugs <i class="fa-solid fa-arrow-right"></i></a>
                 <a href="services.html#fleas">Fleas <i class="fa-solid fa-arrow-right"></i></a>
                 <a href="services.html#weevils">Weevils <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </section>
+        <!-- New Features Section -->
+        <section id="new-features">
+            <h2>Our New Features</h2>
+            <div class="features-grid">
+                <a href="treatment-plans.html" class="feature-card">
+                    <i class="fa-solid fa-qrcode"></i>
+                    <h3>QR Code Booking</h3>
+                    <p>Quick and easy service booking with QR codes</p>
+                </a>
+                <a href="pest-reports.html" class="feature-card">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                    <h3>Real-Time Pest Reports</h3>
+                    <p>Stay informed about pest activity in your area</p>
+                </a>
+                <a href="customer-portal.html" class="feature-card">
+                    <i class="fa-solid fa-user-shield"></i>
+                    <h3>Customer Portal</h3>
+                    <p>Manage your bookings and services online</p>
+                </a>
+                <a href="reviews.html" class="feature-card">
+                    <i class="fa-solid fa-star"></i>
+                    <h3>Customer Reviews</h3>
+                    <p>Read what our customers say about our services</p>
+                </a>
             </div>
         </section>
         <!-- Reviews -->
@@ -114,6 +145,64 @@
             </li>
         </ul>
     </footer>
+    <style>
+        #new-features {
+            padding: 2rem;
+            background: #f8f9fa;
+        }
+
+        #new-features h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #333;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .feature-card i {
+            font-size: 2.5rem;
+            color: #4CAF50;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            margin: 1rem 0;
+            color: #333;
+        }
+
+        .feature-card p {
+            color: #666;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </body>
 
 </html>

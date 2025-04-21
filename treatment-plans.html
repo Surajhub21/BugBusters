@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treatment Plans - Help Me Pest Control</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="assets/images/bug-favicon.svg">
+    <script src="https://kit.fontawesome.com/cd5674c3b8.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+    <style>
+        .treatment-plans-section {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .plan-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .plan-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .plan-title {
+            font-size: 1.5rem;
+            color: #333;
+            margin: 0;
+        }
+
+        .plan-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .plan-rating i {
+            color: #FFD700;
+        }
+
+        .plan-details {
+            margin-bottom: 1.5rem;
+        }
+
+        .plan-details p {
+            margin: 0.5rem 0;
+            color: #666;
+        }
+
+        .plan-features {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+
+        .plan-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .plan-features i {
+            color: #4CAF50;
+        }
+
+        .plan-price {
+            font-size: 1.8rem;
+            color: #4CAF50;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .qr-code-container {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .qr-code-container p {
+            margin-top: 0.5rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .book-now-btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+            margin-top: 1rem;
+        }
+
+        .book-now-btn:hover {
+            background: #45a049;
+        }
+
+        .seasonal-banner {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .treatment-plans-section {
+                padding: 1rem;
+            }
+
+            .plans-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <h1 id="logo"><i class="fa-solid fa-bug"></i> Help Me Pest Control</h1>
+        </a>
+        <input type="checkbox" id="toggle-navbar" name="toggle-navbar" hidden>
+        <label for="toggle-navbar" id="burger" aria-label="Open navbar menu"><i class="fa-solid fa-bars"></i></label>
+        <nav>
+            <ul id="menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="service-booking.html">Book Service</a></li>
+                <li><a href="treatment-plans.html">Treatment Plans</a></li>
+                <li><a href="contact-us.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="treatment-plans-section">
+            <h2>Our Treatment Plans</h2>
+            
+            <div class="seasonal-banner">
+                <h3>Summer Special: 20% Off All Pest Control Services</h3>
+                <p>Book now to protect your home from seasonal pests!</p>
+            </div>
+
+            <div class="plans-grid">
+                <!-- Basic Plan -->
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <h3 class="plan-title">Basic Protection</h3>
+                        <div class="plan-rating">
+                            <i class="fa-solid fa-star"></i>
+                            <span>4.5</span>
+                        </div>
+                    </div>
+                    <div class="plan-details">
+                        <p>Perfect for small homes and apartments</p>
+                    </div>
+                    <ul class="plan-features">
+                        <li><i class="fa-solid fa-check"></i> General pest inspection</li>
+                        <li><i class="fa-solid fa-check"></i> Basic treatment for common pests</li>
+                        <li><i class="fa-solid fa-check"></i> 30-day guarantee</li>
+                        <li><i class="fa-solid fa-check"></i> Quarterly follow-up</li>
+                    </ul>
+                    <div class="plan-price">$99/month</div>
+                    <div class="qr-code-container">
+                        <div id="qr-basic"></div>
+                        <p>Scan to book this plan</p>
+                    </div>
+                    <a href="service-booking.html?plan=basic" class="book-now-btn">Book Now</a>
+                </div>
+
+                <!-- Standard Plan -->
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <h3 class="plan-title">Standard Protection</h3>
+                        <div class="plan-rating">
+                            <i class="fa-solid fa-star"></i>
+                            <span>4.8</span>
+                        </div>
+                    </div>
+                    <div class="plan-details">
+                        <p>Ideal for medium-sized homes</p>
+                    </div>
+                    <ul class="plan-features">
+                        <li><i class="fa-solid fa-check"></i> Comprehensive inspection</li>
+                        <li><i class="fa-solid fa-check"></i> Advanced treatment for all pests</li>
+                        <li><i class="fa-solid fa-check"></i> 60-day guarantee</li>
+                        <li><i class="fa-solid fa-check"></i> Monthly follow-up</li>
+                        <li><i class="fa-solid fa-check"></i> Emergency service priority</li>
+                    </ul>
+                    <div class="plan-price">$149/month</div>
+                    <div class="qr-code-container">
+                        <div id="qr-standard"></div>
+                        <p>Scan to book this plan</p>
+                    </div>
+                    <a href="service-booking.html?plan=standard" class="book-now-btn">Book Now</a>
+                </div>
+
+                <!-- Premium Plan -->
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <h3 class="plan-title">Premium Protection</h3>
+                        <div class="plan-rating">
+                            <i class="fa-solid fa-star"></i>
+                            <span>5.0</span>
+                        </div>
+                    </div>
+                    <div class="plan-details">
+                        <p>Best for large homes and businesses</p>
+                    </div>
+                    <ul class="plan-features">
+                        <li><i class="fa-solid fa-check"></i> Full property inspection</li>
+                        <li><i class="fa-solid fa-check"></i> Premium treatment for all pests</li>
+                        <li><i class="fa-solid fa-check"></i> 90-day guarantee</li>
+                        <li><i class="fa-solid fa-check"></i> Bi-weekly follow-up</li>
+                        <li><i class="fa-solid fa-check"></i> 24/7 emergency service</li>
+                        <li><i class="fa-solid fa-check"></i> Free additional treatments</li>
+                    </ul>
+                    <div class="plan-price">$199/month</div>
+                    <div class="qr-code-container">
+                        <div id="qr-premium"></div>
+                        <p>Scan to book this plan</p>
+                    </div>
+                    <a href="service-booking.html?plan=premium" class="book-now-btn">Book Now</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Generate QR codes for each plan
+        function generateQRCode(elementId, text) {
+            const qr = qrcode(0, 'M');
+            qr.addData(text);
+            qr.make();
+            document.getElementById(elementId).innerHTML = qr.createImgTag(4);
+        }
+
+        // Generate QR codes when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            generateQRCode('qr-basic', window.location.origin + '/service-booking.html?plan=basic');
+            generateQRCode('qr-standard', window.location.origin + '/service-booking.html?plan=standard');
+            generateQRCode('qr-premium', window.location.origin + '/service-booking.html?plan=premium');
+        });
+    </script>
+</body>
+</html> 

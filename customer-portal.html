@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Portal - Help Me Pest Control</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="assets/images/bug-favicon.svg">
+    <script src="https://kit.fontawesome.com/cd5674c3b8.js" crossorigin="anonymous"></script>
+    <style>
+        .portal-section {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+
+        .portal-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .portal-header h2 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .portal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .portal-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .portal-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: #4CAF50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            color: #333;
+            margin: 0;
+        }
+
+        .card-content {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .action-btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .action-btn:hover {
+            background: #45a049;
+        }
+
+        .login-section {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .login-btn {
+            padding: 1rem;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #45a049;
+        }
+
+        .forgot-password {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .forgot-password a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .portal-section {
+                padding: 1rem;
+            }
+
+            .portal-header h2 {
+                font-size: 2rem;
+            }
+
+            .portal-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <h1 id="logo"><i class="fa-solid fa-bug"></i> Help Me Pest Control</h1>
+        </a>
+        <input type="checkbox" id="toggle-navbar" name="toggle-navbar" hidden>
+        <label for="toggle-navbar" id="burger" aria-label="Open navbar menu"><i class="fa-solid fa-bars"></i></label>
+        <nav>
+            <ul id="menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="service-booking.html">Book Service</a></li>
+                <li><a href="treatment-plans.html">Treatment Plans</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="customer-portal.html">Customer Portal</a></li>
+                <li><a href="contact-us.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="portal-section">
+            <div class="portal-header">
+                <h2>Customer Portal</h2>
+                <p>Manage your bookings and services in one place</p>
+            </div>
+
+            <div class="login-section">
+                <h3>Sign In</h3>
+                <form class="login-form">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" required>
+                    </div>
+                    <button type="submit" class="login-btn">Sign In</button>
+                </form>
+                <div class="forgot-password">
+                    <a href="#">Forgot Password?</a>
+                </div>
+            </div>
+
+            <div class="portal-grid">
+                <div class="portal-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fa-solid fa-calendar"></i>
+                        </div>
+                        <h3 class="card-title">Manage Bookings</h3>
+                    </div>
+                    <div class="card-content">
+                        View, reschedule, or cancel your upcoming appointments. Get instant updates on your service status.
+                    </div>
+                    <a href="#" class="action-btn">View Bookings</a>
+                </div>
+
+                <div class="portal-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fa-solid fa-file-invoice"></i>
+                        </div>
+                        <h3 class="card-title">Payment History</h3>
+                    </div>
+                    <div class="card-content">
+                        Access your payment history, download invoices, and manage your payment methods.
+                    </div>
+                    <a href="#" class="action-btn">View Payments</a>
+                </div>
+
+                <div class="portal-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fa-solid fa-bell"></i>
+                        </div>
+                        <h3 class="card-title">Service Alerts</h3>
+                    </div>
+                    <div class="card-content">
+                        Receive notifications about upcoming services, seasonal offers, and important updates.
+                    </div>
+                    <a href="#" class="action-btn">Manage Alerts</a>
+                </div>
+
+                <div class="portal-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <h3 class="card-title">Write a Review</h3>
+                    </div>
+                    <div class="card-content">
+                        Share your experience and help others choose the right pest control service.
+                    </div>
+                    <a href="reviews.html" class="action-btn">Write Review</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.querySelector('.login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Add login logic here
+            alert('Login functionality will be implemented soon!');
+        });
+    </script>
+</body>
+</html> 

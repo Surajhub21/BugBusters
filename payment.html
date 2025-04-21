@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - Help Me Pest Control</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="assets/images/bug-favicon.svg">
+    <script src="https://kit.fontawesome.com/cd5674c3b8.js" crossorigin="anonymous"></script>
+    <style>
+        .payment-section {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+
+        .payment-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .payment-summary, .payment-form {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .payment-summary h3, .payment-form h3 {
+            color: #4CAF50;
+            margin-bottom: 1.5rem;
+        }
+
+        .order-details p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .order-details strong {
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .submit-btn {
+            background: #4CAF50;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: #45a049;
+        }
+
+        @media (max-width: 768px) {
+            .payment-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <h1 id="logo"><i class="fa-solid fa-bug"></i> Help Me Pest Control</h1>
+        </a>
+        <input type="checkbox" id="toggle-navbar" name="toggle-navbar">
+        <label for="toggle-navbar" id="burger" aria-label="Open navbar menu"><i class="fa-solid fa-bars"></i></label>
+        <nav>
+            <ul id="menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="service-booking.html">Book Service</a></li>
+                <li><a href="contact-us.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="payment-section">
+            <h2>Payment Details</h2>
+            <div class="payment-container">
+                <div class="payment-summary">
+                    <h3>Order Summary</h3>
+                    <div id="order-details">
+                        <!-- Order details will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="payment-form">
+                    <h3>Enter Payment Information</h3>
+                    <form id="payment-form">
+                        <div class="form-group">
+                            <label for="card-number">Card Number</label>
+                            <input type="text" id="card-number" placeholder="1234 5678 9012 3456" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="expiry">Expiry Date</label>
+                                <input type="text" id="expiry" placeholder="MM/YY" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cvv">CVV</label>
+                                <input type="text" id="cvv" placeholder="123" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="card-name">Name on Card</label>
+                            <input type="text" id="card-name" required>
+                        </div>
+                        <button type="submit" class="submit-btn">Complete Payment</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Display order summary
+        document.addEventListener('DOMContentLoaded', function() {
+            const bookingData = JSON.parse(localStorage.getItem('bookingData'));
+            if (bookingData) {
+                const orderDetails = document.getElementById('order-details');
+                orderDetails.innerHTML = `
+                    <p><strong>Service Type:</strong> ${bookingData.serviceType}</p>
+                    <p><strong>Pest Type:</strong> ${bookingData.pestType}</p>
+                    <p><strong>Customer:</strong> ${bookingData.name}</p>
+                    <p><strong>Email:</strong> ${bookingData.email}</p>
+                    <p><strong>Phone:</strong> ${bookingData.phNo}</p>
+                    <p><strong>Address:</strong> ${bookingData.address}</p>
+                `;
+            }
+        });
+
+        // Handle payment form submission
+        document.getElementById('payment-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            const submitBtn = document.querySelector('.submit-btn');
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.textContent = 'Processing...';
+            submitBtn.disabled = true;
+            
+            // Get the booking data
+            const bookingData = JSON.parse(localStorage.getItem('bookingData'));
+            
+            // Send data to the backend
+            fetch('https://bugbusters-backend.onrender.com/user', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(bookingData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.text().then(text => {
+                    try {
+                        return text ? JSON.parse(text) : {};
+                    } catch (e) {
+                        console.error('Error parsing JSON:', e);
+                        return { id: Date.now().toString() }; // Generate a temporary ID if response is not JSON
+                    }
+                });
+            })
+            .then(data => {
+                // Store booking ID in localStorage
+                localStorage.setItem('bookingId', data.id || Date.now().toString());
+                // Redirect to booking status page
+                window.location.href = 'booking-status.html';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Restore button state
+                submitBtn.textContent = originalBtnText;
+                submitBtn.disabled = false;
+                
+                // Show error message to user
+                alert('There was an error processing your booking. Please try again later.');
+            });
+        });
+    </script>
+</body>
+</html> 

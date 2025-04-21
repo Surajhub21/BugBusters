@@ -8,8 +8,6 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="icon" href="assets/images/bug-favicon.svg">
     <script src="https://kit.fontawesome.com/cd5674c3b8.js" crossorigin="anonymous"></script>
-    <!-- Stripe Payment Integration -->
-    <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body class="service-booking-page">
     <header>
@@ -30,303 +28,85 @@
 
     <main>
         <section id="booking-section">
-            <h2>Book Your Pest Control Service</h2>
-            <div class="booking-container">
-                <div class="service-options">
-                    <h3>Select Service Type</h3>
-                    <div class="service-cards">
-                        <div class="service-card">
-                            <h4>One-Time Treatment</h4>
-                            <p>Perfect for immediate pest problems</p>
-                            <p class="price">From £99</p>
-                            <button class="book-btn" data-service="one-time">Book Now</button>
-                        </div>
-                        <div class="service-card">
-                            <h4>Monthly Plan</h4>
-                            <p>Regular maintenance and prevention</p>
-                            <p class="price">From £79/month</p>
-                            <button class="book-btn" data-service="monthly">Book Now</button>
-                        </div>
-                        <div class="service-card">
-                            <h4>Quarterly Plan</h4>
-                            <p>Seasonal protection package</p>
-                            <p class="price">From £199/quarter</p>
-                            <button class="book-btn" data-service="quarterly">Book Now</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="booking-form">
-                    <h3>Service Request Form</h3>
-                    <form id="service-booking-form">
-                        <div class="form-group">
-                            <label for="name">Full Name</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="service-type">Service Type</label>
-                            <select id="service-type" name="service-type" required>
-                                <option value="">Select a service</option>
-                                <option value="one-time">One-Time Treatment</option>
-                                <option value="monthly">Monthly Plan</option>
-                                <option value="quarterly">Quarterly Plan</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="pest-type">Pest Type</label>
-                            <select id="pest-type" name="pest-type" required>
-                                <option value="">Select pest type</option>
-                                <option value="wasps">Wasps</option>
-                                <option value="rats">Rats</option>
-                                <option value="moths">Moths</option>
-                                <option value="bedbugs">Bedbugs</option>
-                                <option value="fleas">Fleas</option>
-                                <option value="weevils">Weevils</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Additional Information</label>
-                            <textarea id="message" name="message" rows="4"></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn">Submit Request</button>
-                    </form>
-                </div>
-            </div>
-        </section>
-
-        <!-- Payment Section -->
-        <section class="payment-section">
-            <h2>Secure Payment Options</h2>
-            <div class="payment-options">
-                <div class="payment-option">
-                    <i class="fa-brands fa-cc-visa fa-2x"></i>
-                    <p>Credit/Debit Card</p>
-                </div>
-                <div class="payment-option">
-                    <i class="fa-brands fa-cc-paypal fa-2x"></i>
-                    <p>PayPal</p>
-                </div>
-                <div class="payment-option">
-                    <i class="fa-brands fa-google-pay fa-2x"></i>
-                    <p>Google Pay</p>
-                </div>
-                <div class="payment-option">
-                    <i class="fa-brands fa-apple-pay fa-2x"></i>
-                    <p>Apple Pay</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Status Updates Section -->
-        <section class="status-updates">
-            <h2>Service Status</h2>
-            <div class="status-item">
-                <i class="fa-solid fa-clock"></i>
-                <span>Your booking is confirmed</span>
-            </div>
-            <div class="status-item">
-                <i class="fa-solid fa-user"></i>
-                <span>Technician assigned: John Smith</span>
-            </div>
-            <div class="status-item">
-                <i class="fa-solid fa-calendar"></i>
-                <span>Next visit scheduled: 15th March 2024</span>
-            </div>
-        </section>
-
-        <!-- Treatment Plans -->
-        <section id="treatment-plans">
-            <h2>Weekly Treatment Plans</h2>
-            <div class="plans-container">
-                <div class="plan-card">
-                    <h3>Basic Protection</h3>
+            <h2>Choose Your Service Plan</h2>
+            <div class="service-cards">
+                <div class="service-card">
+                    <h4>One-Time Treatment</h4>
+                    <p>Perfect for immediate pest problems</p>
                     <ul>
-                        <li>Weekly inspection</li>
+                        <li>Single treatment session</li>
+                        <li>Professional inspection</li>
                         <li>Basic pest control</li>
-                        <li>Emergency call-out</li>
+                        <li>30-day guarantee</li>
                     </ul>
-                    <p class="price">£49/week</p>
-                    <button class="btn">Select Plan</button>
+                    <p class="price">From £99</p>
+                    <button class="book-btn" onclick="window.location.href='booking-details.html?serviceType=OneDay'">Book Now</button>
                 </div>
-                <div class="plan-card">
-                    <h3>Standard Protection</h3>
+                <div class="service-card">
+                    <h4>Monthly Plan</h4>
+                    <p>Regular maintenance and prevention</p>
                     <ul>
-                        <li>Weekly inspection</li>
+                        <li>Monthly inspection</li>
                         <li>Advanced pest control</li>
                         <li>Priority emergency call-out</li>
                         <li>Monthly report</li>
+                        <li>60-day guarantee</li>
                     </ul>
-                    <p class="price">£79/week</p>
-                    <button class="btn">Select Plan</button>
+                    <p class="price">From £79/month</p>
+                    <button class="book-btn" onclick="window.location.href='booking-details.html?serviceType=Monthly'">Book Now</button>
                 </div>
-                <div class="plan-card">
-                    <h3>Premium Protection</h3>
+                <div class="service-card">
+                    <h4>Quarterly Plan</h4>
+                    <p>Seasonal protection package</p>
                     <ul>
-                        <li>Daily inspection</li>
+                        <li>Quarterly inspection</li>
                         <li>Premium pest control</li>
                         <li>24/7 emergency call-out</li>
-                        <li>Weekly report</li>
-                        <li>Guaranteed results</li>
+                        <li>Detailed quarterly report</li>
+                        <li>90-day guarantee</li>
                     </ul>
-                    <p class="price">£129/week</p>
-                    <button class="btn">Select Plan</button>
+                    <p class="price">From £199/quarter</p>
+                    <button class="book-btn" onclick="window.location.href='booking-details.html?serviceType=Quarterly'">Book Now</button>
                 </div>
             </div>
         </section>
 
         <!-- Customer Reviews -->
         <section class="reviews-section">
-            <h2>Top Rated Treatments</h2>
-            <div class="review-card">
-                <div class="rating">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                </div>
-                <p>"Excellent service! The technician was professional and thorough."</p>
-                <span>- Sarah M.</span>
-            </div>
-            <div class="review-card">
-                <div class="rating">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                </div>
-                <p>"Quick response and effective treatment. Highly recommended!"</p>
-                <span>- James T.</span>
-            </div>
-        </section>
-
-        <!-- Smart Monitoring -->
-        <section class="smart-monitoring">
-            <h2>Smart Monitoring</h2>
-            <div class="monitoring-card">
-                <h3>Service History</h3>
-                <p>Scan the QR code to view your treatment history and recommendations</p>
-                <div class="qr-code" id="service-history-qr"></div>
-            </div>
-        </section>
-
-        <!-- Real-time Reports -->
-        <section class="reports-section">
-            <h2>Pest Activity Reports</h2>
-            <div class="report-card">
-                <h3>Current Pest Activity</h3>
-                <p>High activity reported in your area for:</p>
-                <ul>
-                    <li>Wasps - Increased sightings</li>
-                    <li>Rats - Moderate activity</li>
-                    <li>Moths - Low activity</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Automated Management System -->
-        <section class="management-system">
-            <h2>Service Management</h2>
-            <div class="management-card">
-                <h3>Your Service Dashboard</h3>
-                <div class="status-timeline">
-                    <div class="timeline-item active">
-                        <i class="fa-solid fa-check-circle"></i>
-                        <span>Booking Confirmed</span>
-                        <small>Today</small>
+            <h2>What Our Customers Say</h2>
+            <div class="reviews-container">
+                <div class="review-card">
+                    <div class="rating">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
                     </div>
-                    <div class="timeline-item">
-                        <i class="fa-solid fa-user"></i>
-                        <span>Technician Assigned</span>
-                        <small>Pending</small>
+                    <p>"Excellent service! The technician was professional and thorough. Our pest problem was solved within a day."</p>
+                    <span>- Sarah M.</span>
+                </div>
+                <div class="review-card">
+                    <div class="rating">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
                     </div>
-                    <div class="timeline-item">
-                        <i class="fa-solid fa-calendar-check"></i>
-                        <span>Service Completed</span>
-                        <small>Pending</small>
+                    <p>"Quick response and effective treatment. The monthly plan has kept our home pest-free for over a year now."</p>
+                    <span>- James T.</span>
+                </div>
+                <div class="review-card">
+                    <div class="rating">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
                     </div>
-                </div>
-                <div class="management-actions">
-                    <button class="btn" id="reschedule-btn">Reschedule Service</button>
-                    <button class="btn" id="cancel-btn">Cancel Service</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Dynamic Pricing Section -->
-        <section class="dynamic-pricing">
-            <h2>Smart Pricing</h2>
-            <div class="pricing-card">
-                <h3>Current Market Rates</h3>
-                <div class="price-indicator">
-                    <span class="current-price">£99</span>
-                    <span class="price-trend up">↑ 10%</span>
-                </div>
-                <p>Prices are dynamically adjusted based on:</p>
-                <ul>
-                    <li>Seasonal demand</li>
-                    <li>Pest activity in your area</li>
-                    <li>Service availability</li>
-                </ul>
-                <button class="btn" id="lock-price-btn">Lock Current Price</button>
-            </div>
-        </section>
-
-        <!-- Customer Feedback Section -->
-        <section class="feedback-system">
-            <h2>Help Us Improve</h2>
-            <div class="feedback-card">
-                <h3>Share Your Experience</h3>
-                <form id="feedback-form">
-                    <div class="form-group">
-                        <label for="service-rating">Service Rating</label>
-                        <div class="rating-stars">
-                            <i class="fa-solid fa-star" data-rating="1"></i>
-                            <i class="fa-solid fa-star" data-rating="2"></i>
-                            <i class="fa-solid fa-star" data-rating="3"></i>
-                            <i class="fa-solid fa-star" data-rating="4"></i>
-                            <i class="fa-solid fa-star" data-rating="5"></i>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="feedback-comment">Your Feedback</label>
-                        <textarea id="feedback-comment" rows="4" placeholder="Tell us about your experience..."></textarea>
-                    </div>
-                    <button type="submit" class="btn">Submit Feedback</button>
-                </form>
-            </div>
-        </section>
-
-        <!-- Social Media Promotions -->
-        <section class="social-promotions">
-            <h2>Special Offers</h2>
-            <div class="promotion-cards">
-                <div class="promotion-card">
-                    <i class="fa-brands fa-facebook"></i>
-                    <h3>Facebook Exclusive</h3>
-                    <p>Get 15% off your first service when you book through Facebook</p>
-                    <a href="#" class="btn">Claim Offer</a>
-                </div>
-                <div class="promotion-card">
-                    <i class="fa-brands fa-instagram"></i>
-                    <h3>Instagram Special</h3>
-                    <p>Follow us for weekly pest prevention tips and exclusive discounts</p>
-                    <a href="#" class="btn">Follow Us</a>
-                </div>
-                <div class="promotion-card">
-                    <i class="fa-solid fa-users"></i>
-                    <h3>Referral Program</h3>
-                    <p>Refer a friend and both get £20 off your next service</p>
-                    <a href="#" class="btn">Share Now</a>
+                    <p>"The quarterly plan is perfect for our needs. Professional service and great value for money."</p>
+                    <span>- Emma R.</span>
                 </div>
             </div>
         </section>
@@ -351,7 +131,5 @@
             </li>
         </ul>
     </footer>
-
-    <script src="assets/js/booking.js"></script>
 </body>
 </html> 

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pest Reports - Help Me Pest Control</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="assets/images/bug-favicon.svg">
+    <script src="https://kit.fontawesome.com/cd5674c3b8.js" crossorigin="anonymous"></script>
+    <style>
+        .reports-section {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+
+        .reports-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .reports-header h2 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .reports-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .report-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .report-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .report-icon {
+            width: 50px;
+            height: 50px;
+            background: #4CAF50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .report-title {
+            font-size: 1.5rem;
+            color: #333;
+            margin: 0;
+        }
+
+        .report-content {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .risk-level {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .risk-high {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .risk-medium {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+
+        .risk-low {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .prevention-tips {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+        }
+
+        .prevention-tips h4 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .prevention-tips ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .prevention-tips li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: #666;
+        }
+
+        .prevention-tips i {
+            color: #4CAF50;
+        }
+
+        .map-container {
+            margin-top: 3rem;
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .map-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .map-title {
+            font-size: 1.5rem;
+            color: #333;
+            margin: 0;
+        }
+
+        .map-legend {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+
+        .map-placeholder {
+            height: 400px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .reports-section {
+                padding: 1rem;
+            }
+
+            .reports-header h2 {
+                font-size: 2rem;
+            }
+
+            .reports-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .map-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <h1 id="logo"><i class="fa-solid fa-bug"></i> Help Me Pest Control</h1>
+        </a>
+        <input type="checkbox" id="toggle-navbar" name="toggle-navbar" hidden>
+        <label for="toggle-navbar" id="burger" aria-label="Open navbar menu"><i class="fa-solid fa-bars"></i></label>
+        <nav>
+            <ul id="menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="service-booking.html">Book Service</a></li>
+                <li><a href="treatment-plans.html">Treatment Plans</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="pest-reports.html">Pest Reports</a></li>
+                <li><a href="contact-us.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="reports-section">
+            <div class="reports-header">
+                <h2>Real-Time Pest Reports</h2>
+                <p>Stay informed about pest activity in your area</p>
+            </div>
+
+            <div class="reports-grid">
+                <!-- Cockroach Report -->
+                <div class="report-card">
+                    <div class="report-header">
+                        <div class="report-icon">
+                            <i class="fa-solid fa-cockroach"></i>
+                        </div>
+                        <h3 class="report-title">Cockroach Activity</h3>
+                    </div>
+                    <div class="risk-level risk-high">High Risk</div>
+                    <div class="report-content">
+                        Increased cockroach activity reported in residential areas. Warm weather conditions are contributing to higher infestation rates.
+                    </div>
+                    <div class="prevention-tips">
+                        <h4>Prevention Tips:</h4>
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> Keep food in sealed containers</li>
+                            <li><i class="fa-solid fa-check"></i> Clean up spills immediately</li>
+                            <li><i class="fa-solid fa-check"></i> Fix leaky pipes and faucets</li>
+                            <li><i class="fa-solid fa-check"></i> Seal cracks and crevices</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Rodent Report -->
+                <div class="report-card">
+                    <div class="report-header">
+                        <div class="report-icon">
+                            <i class="fa-solid fa-rat"></i>
+                        </div>
+                        <h3 class="report-title">Rodent Activity</h3>
+                    </div>
+                    <div class="risk-level risk-medium">Medium Risk</div>
+                    <div class="report-content">
+                        Moderate rodent activity detected. Recent weather changes have increased nesting behavior in urban areas.
+                    </div>
+                    <div class="prevention-tips">
+                        <h4>Prevention Tips:</h4>
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> Store garbage in sealed containers</li>
+                            <li><i class="fa-solid fa-check"></i> Trim vegetation near buildings</li>
+                            <li><i class="fa-solid fa-check"></i> Seal entry points around pipes</li>
+                            <li><i class="fa-solid fa-check"></i> Keep pet food indoors</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Ant Report -->
+                <div class="report-card">
+                    <div class="report-header">
+                        <div class="report-icon">
+                            <i class="fa-solid fa-bug"></i>
+                        </div>
+                        <h3 class="report-title">Ant Activity</h3>
+                    </div>
+                    <div class="risk-level risk-low">Low Risk</div>
+                    <div class="report-content">
+                        Normal ant activity levels reported. Regular monitoring recommended during summer months.
+                    </div>
+                    <div class="prevention-tips">
+                        <h4>Prevention Tips:</h4>
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> Clean up food crumbs</li>
+                            <li><i class="fa-solid fa-check"></i> Store sweet items in containers</li>
+                            <li><i class="fa-solid fa-check"></i> Seal entry points</li>
+                            <li><i class="fa-solid fa-check"></i> Maintain clean surfaces</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="map-container">
+                <div class="map-header">
+                    <h3 class="map-title">Pest Activity Map</h3>
+                    <div class="map-legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #c62828;"></div>
+                            <span>High Risk</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #ef6c00;"></div>
+                            <span>Medium Risk</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #2e7d32;"></div>
+                            <span>Low Risk</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="map-placeholder">
+                    Interactive map will be displayed here
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Add map integration logic here
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize map and load pest data
+            console.log('Map initialization will be implemented soon');
+        });
+    </script>
+</body>
+</html> 
