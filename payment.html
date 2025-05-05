@@ -3,188 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment - Help Me Pest Control</title>
+    <title>Payment - BugBusters</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="icon" href="assets/images/bug-favicon.svg">
     <script src="https://kit.fontawesome.com/cd5674c3b8.js" crossorigin="anonymous"></script>
     <style>
-        /* Base Animation Styles */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideIn {
-            from { transform: translateX(-20px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        /* Responsive Animation Classes */
-        .animate-fade-in {
-            animation: fadeIn 0.5s ease-out forwards;
-        }
-
-        .animate-slide-in {
-            animation: slideIn 0.5s ease-out forwards;
-        }
-
-        .animate-pulse {
-            animation: pulse 2s infinite;
-        }
-
-        /* Payment Section Animations */
-        .payment-section {
-            max-width: 1000px;
+        .payment-container {
+            max-width: 800px;
             margin: 2rem auto;
             padding: 2rem;
-            animation: fadeIn 0.5s ease-out forwards;
-        }
-
-        .payment-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            animation: fadeIn 0.7s ease-out forwards;
-        }
-
-        .payment-summary, .payment-form {
-            background: #fff;
-            padding: 2rem;
+            background: white;
             border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
-        .payment-summary:hover, .payment-form:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+        .payment-header {
+            text-align: center;
+            margin-bottom: 2rem;
         }
 
-        /* Form Input Animations */
-        .form-group input {
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus {
-            transform: scale(1.02);
-            box-shadow: 0 0 10px rgba(76, 175, 80, 0.2);
-        }
-
-        /* Submit Button Animation */
-        .submit-btn {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
-        }
-
-        .submit-btn:active {
-            transform: translateY(1px);
-        }
-
-        /* Loading Animation */
-        .submit-btn.loading {
-            position: relative;
-            color: transparent;
-        }
-
-        .submit-btn.loading::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            top: 50%;
-            left: 50%;
-            margin: -10px 0 0 -10px;
-            border: 2px solid #fff;
-            border-top-color: transparent;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .payment-container {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .payment-summary, .payment-form {
-                padding: 1.5rem;
-            }
-
-            .animate-fade-in {
-                animation-duration: 0.4s;
-            }
-
-            .animate-slide-in {
-                animation-duration: 0.4s;
-            }
-
-            .form-group input:focus {
-                transform: scale(1.01);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .payment-section {
-                padding: 1rem;
-                margin: 1rem auto;
-            }
-
-            .payment-summary, .payment-form {
-                padding: 1rem;
-            }
-
-            .animate-fade-in {
-                animation-duration: 0.3s;
-            }
-
-            .animate-slide-in {
-                animation-duration: 0.3s;
-            }
-
-            .submit-btn {
-                padding: 0.8rem 1.5rem;
-            }
-        }
-
-        /* Reduced Motion Preferences */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
-            }
-        }
-
-        .payment-summary h3, .payment-form h3 {
-            color: #4CAF50;
-            margin-bottom: 1.5rem;
-        }
-
-        .order-details p {
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
-
-        .order-details strong {
+        .payment-header h2 {
             color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .payment-details {
+            margin-bottom: 2rem;
+        }
+
+        .payment-detail {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .payment-detail:last-child {
+            border-bottom: none;
+        }
+
+        .payment-detail span:first-child {
+            color: #666;
+        }
+
+        .payment-detail span:last-child {
+            font-weight: 500;
+        }
+
+        .payment-form {
+            margin-top: 2rem;
         }
 
         .form-group {
@@ -194,7 +61,6 @@
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
-            font-weight: 600;
             color: #333;
         }
 
@@ -204,433 +70,202 @@
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 1rem;
-            transition: border-color 0.3s;
         }
 
-        .form-group input:focus {
-            border-color: #4CAF50;
-            outline: none;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        .submit-btn {
+        .payment-btn {
+            width: 100%;
+            padding: 1rem;
             background: #4CAF50;
             color: white;
-            padding: 1rem 2rem;
             border: none;
             border-radius: 5px;
             font-size: 1.1rem;
             cursor: pointer;
             transition: background 0.3s;
-            width: 100%;
         }
 
-        .submit-btn:hover {
+        .payment-btn:hover {
             background: #45a049;
         }
 
-        /* Navbar Styles */
-        header {
-            position: relative;
-            padding: 1rem;
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            z-index: 1000;
+        .payment-btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
         }
 
-        #logo {
-            display: inline-block;
-            margin: 0;
-            color: #333;
-            font-size: 1.5rem;
-            transition: font-size 0.3s ease;
-            z-index: 1001;
-        }
-
-        #logo i {
-            margin-right: 0.5rem;
-            font-size: 1.2em;
-        }
-
-        #menu-icon {
+        .loading {
             display: none;
-            font-size: 1.5rem;
-            color: #333;
-            cursor: pointer;
-            padding: 0.5rem;
-            transition: transform 0.3s ease;
-            z-index: 1001;
+            text-align: center;
+            margin-top: 1rem;
         }
 
-        #menu-icon:hover {
+        .loading i {
+            font-size: 2rem;
             color: #4CAF50;
-            transform: rotate(90deg);
+            animation: spin 1s linear infinite;
         }
 
-        nav {
-            position: absolute;
-            top: 0;
-            right: 0;
-            background: white;
-            border-radius: 0 0 0 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateX(20px);
-            transition: all 0.3s ease;
-            z-index: 999;
-            height: 100%;
-            display: flex;
-            align-items: center;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        header:hover nav {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(0);
+        .error-message {
+            color: #dc3545;
+            text-align: center;
+            margin-top: 1rem;
+            display: none;
         }
 
-        #menu {
-            list-style: none;
-            padding: 0 1rem;
-            margin: 0;
-            display: flex;
-            gap: 1rem;
-        }
-
-        #menu li {
-            position: relative;
-        }
-
-        #menu a {
-            color: #333;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            display: block;
-            transition: all 0.3s ease;
-            border-radius: 5px;
-            font-size: 1rem;
-            white-space: nowrap;
-        }
-
-        #menu a:hover {
-            color: #4CAF50;
-            background: rgba(76, 175, 80, 0.1);
-        }
-
-        #menu a.active {
-            color: #4CAF50;
-            background: rgba(76, 175, 80, 0.1);
-            font-weight: 500;
-        }
-
-        /* Tablet Devices (768px - 1024px) */
-        @media (max-width: 1024px) {
-            #logo {
-                font-size: 1.3rem;
-            }
-
-            #menu a {
-                font-size: 0.9rem;
-                padding: 0.4rem 0.8rem;
-            }
-        }
-
-        /* Mobile Menu Styles */
-        @media (max-width: 768px) {
-            header {
-                padding: 0.8rem;
-            }
-
-            #logo {
-                font-size: 1.2rem;
-            }
-
-            #menu-icon {
-                display: block;
-            }
-
-            nav {
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                width: 100%;
-                background: white;
-                padding: 0;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.5s ease-in-out;
-                z-index: 999;
-                opacity: 1;
-                visibility: visible;
-                transform: none;
-                height: auto;
-            }
-
-            #menu-icon.active + nav {
-                max-height: 100vh;
-                padding-top: 4rem;
-            }
-
-            #menu {
-                flex-direction: column;
-                padding: 0;
-                margin: 0;
-                gap: 0;
-            }
-
-            #menu li {
-                width: 100%;
-                border-bottom: 1px solid #eee;
-                opacity: 0;
-                transform: translateX(-20px);
-                transition: all 0.3s ease;
-            }
-
-            #menu-icon.active + nav #menu li {
-                opacity: 1;
-                transform: translateX(0);
-            }
-
-            #menu li:nth-child(1) { transition-delay: 0.1s; }
-            #menu li:nth-child(2) { transition-delay: 0.2s; }
-            #menu li:nth-child(3) { transition-delay: 0.3s; }
-            #menu li:nth-child(4) { transition-delay: 0.4s; }
-            #menu li:nth-child(5) { transition-delay: 0.5s; }
-            #menu li:nth-child(6) { transition-delay: 0.6s; }
-            #menu li:nth-child(7) { transition-delay: 0.7s; }
-            #menu li:nth-child(8) { transition-delay: 0.8s; }
-
-            #menu li:last-child {
-                border-bottom: none;
-            }
-
-            #menu a {
-                padding: 1rem;
-                text-align: left;
-                font-size: 1rem;
-                white-space: normal;
-            }
-        }
-
-        /* Small Mobile Devices (480px and below) */
-        @media (max-width: 480px) {
-            header {
-                padding: 0.6rem;
-            }
-
-            #logo {
-                font-size: 1rem;
-            }
-
-            #logo i {
-                font-size: 1.1em;
-            }
-
-            #menu-icon {
-                padding: 0.6rem;
-                font-size: 1.2rem;
-            }
-
-            #menu a {
-                padding: 0.8rem 1rem;
-                font-size: 0.9rem;
-            }
-        }
-
-        /* Extra Small Devices (320px and below) */
-        @media (max-width: 320px) {
-            header {
-                padding: 0.5rem;
-            }
-
-            #logo {
-                font-size: 0.9rem;
-            }
-
-            #logo i {
-                font-size: 1em;
-            }
-
-            #menu-icon {
-                padding: 0.5rem;
-                font-size: 1.1rem;
-            }
-
-            #menu a {
-                padding: 0.7rem 1rem;
-                font-size: 0.8rem;
-            }
+        .success-message {
+            color: #28a745;
+            text-align: center;
+            margin-top: 1rem;
+            display: none;
         }
     </style>
 </head>
 <body>
-    <header>
-        <a href="index.html">
-            <h1 id="logo"><i class="fa-solid fa-bug"></i> Help Me Pest Control</h1>
-        </a>
-        <input type="checkbox" id="toggle-navbar" name="toggle-navbar">
-        <label for="toggle-navbar" id="burger" aria-label="Open navbar menu"><i class="fa-solid fa-bars"></i></label>
-        <nav>
-            <ul id="menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="service-booking.html">Book Service</a></li>
-                <li><a href="contact-us.html">Contact Us</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div class="payment-container">
+        <div class="payment-header">
+            <h2>Complete Your Payment</h2>
+            <p>Please review your booking details and proceed with payment</p>
+        </div>
 
-    <main>
-        <section class="payment-section">
-            <h2>Payment Details</h2>
-            <div class="payment-container">
-                <div class="payment-summary">
-                    <h3>Order Summary</h3>
-                    <div id="order-details">
-                        <!-- Order details will be populated by JavaScript -->
-                    </div>
-                </div>
-                
-                <div class="payment-form">
-                    <h3>Enter Payment Information</h3>
-                    <form id="payment-form">
-                        <div class="form-group">
-                            <label for="card-number">Card Number</label>
-                            <input type="text" id="card-number" placeholder="1234 5678 9012 3456" required>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="expiry">Expiry Date</label>
-                                <input type="text" id="expiry" placeholder="MM/YY" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="cvv">CVV</label>
-                                <input type="text" id="cvv" placeholder="123" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="card-name">Name on Card</label>
-                            <input type="text" id="card-name" required>
-                        </div>
-                        <button type="submit" class="submit-btn">Complete Payment</button>
-                    </form>
-                </div>
+        <div class="payment-details">
+            <div class="payment-detail">
+                <span>Service Type</span>
+                <span id="serviceType">Loading...</span>
             </div>
-        </section>
-    </main>
+            <div class="payment-detail">
+                <span>Date</span>
+                <span id="bookingDate">Loading...</span>
+            </div>
+            <div class="payment-detail">
+                <span>Time</span>
+                <span id="bookingTime">Loading...</span>
+            </div>
+            <div class="payment-detail">
+                <span>Total Amount</span>
+                <span id="totalAmount">Loading...</span>
+            </div>
+        </div>
+
+        <form class="payment-form" id="paymentForm">
+            <div class="form-group">
+                <label for="cardNumber">Card Number</label>
+                <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required>
+            </div>
+            <div class="form-group">
+                <label for="expiryDate">Expiry Date</label>
+                <input type="text" id="expiryDate" placeholder="MM/YY" required>
+            </div>
+            <div class="form-group">
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" placeholder="123" required>
+            </div>
+            <button type="submit" class="payment-btn" id="paymentBtn">Complete Payment</button>
+        </form>
+
+        <div class="loading" id="loading">
+            <i class="fa-solid fa-spinner"></i>
+            <p>Processing payment...</p>
+        </div>
+
+        <div class="error-message" id="errorMessage">
+            <i class="fa-solid fa-exclamation-circle"></i>
+            <p>An error occurred. Please try again.</p>
+        </div>
+
+        <div class="success-message" id="successMessage">
+            <i class="fa-solid fa-check-circle"></i>
+            <p>Payment successful! Redirecting to booking details...</p>
+        </div>
+    </div>
 
     <script>
-        // Display order summary
         document.addEventListener('DOMContentLoaded', function() {
-            const bookingData = JSON.parse(localStorage.getItem('bookingData'));
-            if (bookingData) {
-                const orderDetails = document.getElementById('order-details');
-                orderDetails.innerHTML = `
-                    <p><strong>Service Type:</strong> ${bookingData.serviceType}</p>
-                    <p><strong>Pest Type:</strong> ${bookingData.pestType}</p>
-                    <p><strong>Customer:</strong> ${bookingData.name}</p>
-                    <p><strong>Email:</strong> ${bookingData.email}</p>
-                    <p><strong>Phone:</strong> ${bookingData.phNo}</p>
-                    <p><strong>Address:</strong> ${bookingData.address}</p>
-                `;
-            }
-        });
+            // Get booking details from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const serviceId = urlParams.get('serviceId');
+            const date = urlParams.get('date');
+            const time = urlParams.get('time');
+            const amount = urlParams.get('amount');
 
-        // Update the payment form submission handler
-        document.getElementById('payment-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const submitBtn = document.querySelector('.submit-btn');
-            const originalBtnText = submitBtn.textContent;
-            
-            // Add loading animation
-            submitBtn.classList.add('loading');
-            submitBtn.disabled = true;
-            
-            // Get the booking data
-            const bookingData = JSON.parse(localStorage.getItem('bookingData'));
-            
-            // Send data to the backend
-            fetch('https://bugbusters-backend.onrender.com/user', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(bookingData)
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+            // Update payment details
+            document.getElementById('serviceType').textContent = serviceId ? 'Service #' + serviceId : 'N/A';
+            document.getElementById('bookingDate').textContent = date || 'N/A';
+            document.getElementById('bookingTime').textContent = time || 'N/A';
+            document.getElementById('totalAmount').textContent = amount ? `$${amount}` : 'N/A';
+
+            // Handle form submission
+            const paymentForm = document.getElementById('paymentForm');
+            const paymentBtn = document.getElementById('paymentBtn');
+            const loading = document.getElementById('loading');
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
+
+            paymentForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                // Get user data from localStorage
+                const user = JSON.parse(localStorage.getItem('user'));
+                if (!user) {
+                    window.location.href = 'login.html';
+                    return;
                 }
-                return response.text().then(text => {
-                    try {
-                        return text ? JSON.parse(text) : {};
-                    } catch (e) {
-                        console.error('Error parsing JSON:', e);
-                        return { id: Date.now().toString() };
-                    }
-                });
-            })
-            .then(data => {
-                // Store booking ID in localStorage
-                localStorage.setItem('bookingId', data.id || Date.now().toString());
-                
-                // Add success animation before redirect
-                document.querySelector('.payment-container').classList.add('animate-fade-in');
-                setTimeout(() => {
-                    window.location.href = 'booking-status.html';
-                }, 500);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                
-                // Remove loading animation
-                submitBtn.classList.remove('loading');
-                submitBtn.textContent = originalBtnText;
-                submitBtn.disabled = false;
-                
-                // Show error message with animation
-                const errorMessage = document.createElement('div');
-                errorMessage.className = 'error-message animate-fade-in';
-                errorMessage.textContent = 'There was an error processing your booking. Please try again later.';
-                errorMessage.style.cssText = `
-                    position: fixed;
-                    top: 20px;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    background: #ff4444;
-                    color: white;
-                    padding: 1rem;
-                    border-radius: 5px;
-                    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-                    z-index: 1000;
-                `;
-                document.body.appendChild(errorMessage);
-                
-                // Remove error message after 3 seconds
-                setTimeout(() => {
-                    errorMessage.remove();
-                }, 3000);
-            });
-        });
 
-        // Add mobile menu toggle functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const menuIcon = document.getElementById('menu-icon');
-            
-            menuIcon.addEventListener('click', function() {
-                this.classList.toggle('active');
+                // Show loading state
+                paymentBtn.disabled = true;
+                loading.style.display = 'block';
+                errorMessage.style.display = 'none';
+                successMessage.style.display = 'none';
+
+                try {
+                    // 1. Send email notification
+                    const emailResponse = await fetch('https://bugbusters-backend-jyeu.onrender.com/email', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(user)
+                    });
+
+                    if (!emailResponse.ok) {
+                        throw new Error('Failed to send email notification');
+                    }
+
+                    // 2. Create booking
+                    const bookingResponse = await fetch('https://bugbusters-backend-jyeu.onrender.com/booking', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            user_id: user.id,
+                            pest_id: serviceId
+                        })
+                    });
+
+                    if (!bookingResponse.ok) {
+                        throw new Error('Failed to create booking');
+                    }
+
+                    // Show success message
+                    successMessage.style.display = 'block';
+                    
+                    // Redirect to booking details after 2 seconds
+                    setTimeout(() => {
+                        window.location.href = 'booking-details.html';
+                    }, 2000);
+
+                } catch (error) {
+                    console.error('Payment error:', error);
+                    errorMessage.style.display = 'block';
+                    paymentBtn.disabled = false;
+                } finally {
+                    loading.style.display = 'none';
+                }
             });
         });
     </script>
