@@ -3,55 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment - BugBusters</title>
+    <meta name="description" content="Make payment for your pest control service">
+    <title>Payment - Help Me Pest Control</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="icon" href="assets/images/bug-favicon.svg">
     <script src="https://kit.fontawesome.com/cd5674c3b8.js" crossorigin="anonymous"></script>
     <style>
         .payment-container {
-            max-width: 800px;
+            max-width: 600px;
             margin: 2rem auto;
             padding: 2rem;
             background: white;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .payment-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .payment-header h2 {
-            color: #333;
-            margin-bottom: 1rem;
-        }
-
-        .payment-details {
-            margin-bottom: 2rem;
-        }
-
-        .payment-detail {
-            display: flex;
-            justify-content: space-between;
-            padding: 1rem 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .payment-detail:last-child {
-            border-bottom: none;
-        }
-
-        .payment-detail span:first-child {
-            color: #666;
-        }
-
-        .payment-detail span:last-child {
-            font-weight: 500;
-        }
-
-        .payment-form {
-            margin-top: 2rem;
         }
 
         .form-group {
@@ -68,29 +32,24 @@
             width: 100%;
             padding: 0.8rem;
             border: 1px solid #ddd;
-            border-radius: 5px;
+            border-radius: 4px;
             font-size: 1rem;
         }
 
-        .payment-btn {
-            width: 100%;
-            padding: 1rem;
+        .pay-button {
             background: #4CAF50;
             color: white;
+            padding: 1rem 2rem;
             border: none;
             border-radius: 5px;
             font-size: 1.1rem;
             cursor: pointer;
+            width: 100%;
             transition: background 0.3s;
         }
 
-        .payment-btn:hover {
+        .pay-button:hover {
             background: #45a049;
-        }
-
-        .payment-btn:disabled {
-            background: #cccccc;
-            cursor: not-allowed;
         }
 
         .loading {
@@ -99,26 +58,8 @@
             margin-top: 1rem;
         }
 
-        .loading i {
-            font-size: 2rem;
-            color: #4CAF50;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
         .error-message {
             color: #dc3545;
-            text-align: center;
-            margin-top: 1rem;
-            display: none;
-        }
-
-        .success-message {
-            color: #28a745;
             text-align: center;
             margin-top: 1rem;
             display: none;
@@ -126,143 +67,164 @@
     </style>
 </head>
 <body>
-    <div class="payment-container">
-        <div class="payment-header">
-            <h2>Complete Your Payment</h2>
-            <p>Please review your booking details and proceed with payment</p>
-        </div>
+    <header>
+        <a href="index.html">
+            <h1 id="logo"><i class="fa-solid fa-bug"></i> Help Me Pest Control</h1>
+        </a>
+        <i id="menu-icon" class="fa-solid fa-bars"></i>
+        <nav>
+            <ul id="menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="service-booking.html">Book Service</a></li>
+                <li><a href="contact-us.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
 
-        <div class="payment-details">
-            <div class="payment-detail">
-                <span>Service Type</span>
-                <span id="serviceType">Loading...</span>
-            </div>
-            <div class="payment-detail">
-                <span>Date</span>
-                <span id="bookingDate">Loading...</span>
-            </div>
-            <div class="payment-detail">
-                <span>Time</span>
-                <span id="bookingTime">Loading...</span>
-            </div>
-            <div class="payment-detail">
-                <span>Total Amount</span>
-                <span id="totalAmount">Loading...</span>
-            </div>
-        </div>
+    <main>
+        <div class="payment-container">
+            <h2>Complete Payment</h2>
+            <form id="paymentForm">
+                <div class="form-group">
+                    <label for="cardNumber">Card Number</label>
+                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                </div>
 
-        <form class="payment-form" id="paymentForm">
-            <div class="form-group">
-                <label for="cardNumber">Card Number</label>
-                <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required>
-            </div>
-            <div class="form-group">
-                <label for="expiryDate">Expiry Date</label>
-                <input type="text" id="expiryDate" placeholder="MM/YY" required>
-            </div>
-            <div class="form-group">
-                <label for="cvv">CVV</label>
-                <input type="text" id="cvv" placeholder="123" required>
-            </div>
-            <button type="submit" class="payment-btn" id="paymentBtn">Complete Payment</button>
-        </form>
+                <div class="form-group">
+                    <label for="cardName">Name on Card</label>
+                    <input type="text" id="cardName" placeholder="John Doe" required>
+                </div>
 
-        <div class="loading" id="loading">
-            <i class="fa-solid fa-spinner"></i>
-            <p>Processing payment...</p>
-        </div>
+                <div class="form-group">
+                    <label for="expiryDate">Expiry Date</label>
+                    <input type="text" id="expiryDate" placeholder="MM/YY" maxlength="5" required>
+                </div>
 
-        <div class="error-message" id="errorMessage">
-            <i class="fa-solid fa-exclamation-circle"></i>
-            <p>An error occurred. Please try again.</p>
-        </div>
+                <div class="form-group">
+                    <label for="cvv">CVV</label>
+                    <input type="text" id="cvv" placeholder="123" maxlength="3" required>
+                </div>
 
-        <div class="success-message" id="successMessage">
-            <i class="fa-solid fa-check-circle"></i>
-            <p>Payment successful! Redirecting to booking details...</p>
+                <button type="submit" class="pay-button">Pay Now</button>
+            </form>
+
+            <div class="loading" id="loading">
+                <i class="fa-solid fa-spinner fa-spin"></i>
+                Processing payment...
+            </div>
+
+            <div class="error-message" id="errorMessage"></div>
         </div>
-    </div>
+    </main>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Get booking details from URL parameters
-            const urlParams = new URLSearchParams(window.location.search);
-            const serviceId = urlParams.get('serviceId');
-            const date = urlParams.get('date');
-            const time = urlParams.get('time');
-            const amount = urlParams.get('amount');
-
-            // Update payment details
-            document.getElementById('serviceType').textContent = serviceId ? 'Service #' + serviceId : 'N/A';
-            document.getElementById('bookingDate').textContent = date || 'N/A';
-            document.getElementById('bookingTime').textContent = time || 'N/A';
-            document.getElementById('totalAmount').textContent = amount ? `$${amount}` : 'N/A';
-
-            // Handle form submission
             const paymentForm = document.getElementById('paymentForm');
-            const paymentBtn = document.getElementById('paymentBtn');
             const loading = document.getElementById('loading');
             const errorMessage = document.getElementById('errorMessage');
-            const successMessage = document.getElementById('successMessage');
 
+            // Get booking data from localStorage
+            const bookingData = JSON.parse(localStorage.getItem('bookingData'));
+            const user = JSON.parse(localStorage.getItem('user'));
+            
+            if (!bookingData || !user) {
+                alert('Please select a service first');
+                window.location.href = 'services.html';
+                return;
+            }
+
+            // Format card number input
+            const cardNumber = document.getElementById('cardNumber');
+            cardNumber.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                value = value.replace(/(\d{4})/g, '$1 ').trim();
+                e.target.value = value;
+            });
+
+            // Format expiry date input
+            const expiryDate = document.getElementById('expiryDate');
+            expiryDate.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length >= 2) {
+                    value = value.slice(0,2) + '/' + value.slice(2);
+                }
+                e.target.value = value;
+            });
+
+            // Handle form submission
             paymentForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
-
-                // Get user data from localStorage
-                const user = JSON.parse(localStorage.getItem('user'));
-                if (!user) {
-                    window.location.href = 'login.html';
-                    return;
-                }
-
-                // Show loading state
-                paymentBtn.disabled = true;
+                
+                // Show loading
                 loading.style.display = 'block';
                 errorMessage.style.display = 'none';
-                successMessage.style.display = 'none';
-
+                
                 try {
-                    // 1. Send email notification
-                    const emailResponse = await fetch('https://bugbusters-backend-jyeu.onrender.com/email', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(user)
-                    });
+                    // Create booking data according to the Booking class
+                    const bookingPayload = {
+                        userId: user.id,
+                        pestId: bookingData.pestId,
+                        pricingType: bookingData.serviceType || 'One-time',
+                        priceDetails: bookingData.serviceType || 'One-time service',
+                        price: '99', // Default price if not specified
+                        status: 'PENDING',
+                        createdTime: new Date().toISOString()
+                    };
 
-                    if (!emailResponse.ok) {
-                        throw new Error('Failed to send email notification');
-                    }
+                    console.log('Sending booking data:', bookingPayload);
 
-                    // 2. Create booking
+                    // Create booking
                     const bookingResponse = await fetch('https://bugbusters-backend-jyeu.onrender.com/booking', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({
-                            user_id: user.id,
-                            pest_id: serviceId
-                        })
+                        body: JSON.stringify(bookingPayload)
                     });
 
                     if (!bookingResponse.ok) {
                         throw new Error('Failed to create booking');
                     }
 
-                    // Show success message
-                    successMessage.style.display = 'block';
+                    const savedBooking = await bookingResponse.json();
+                    console.log('Booking created:', savedBooking);
+
+                    // Send email notification
+                    const emailPayload = {
+                        to: user.email,
+                        subject: 'Booking Confirmation - Help Me Pest Control',
+                        body: `Your booking has been confirmed.
+                               Service Type: ${bookingData.serviceType || 'One-time'}
+                               Price: ₹99
+                               Booking ID: ${savedBooking.id}`
+                    };
+
+                    console.log('Sending email data:', emailPayload);
+
+                    const emailResponse = await fetch('https://bugbusters-backend-jyeu.onrender.com/email', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(emailPayload)
+                    });
+
+                    if (!emailResponse.ok) {
+                        console.warn('Failed to send email notification');
+                    }
+
+                    // Clear booking data from localStorage
+                    localStorage.removeItem('bookingData');
                     
-                    // Redirect to booking details after 2 seconds
-                    setTimeout(() => {
-                        window.location.href = 'booking-details.html';
-                    }, 2000);
+                    // Show success message and redirect
+                    alert('Payment successful! Your booking has been confirmed.');
+                    window.location.href = 'index.html';
 
                 } catch (error) {
-                    console.error('Payment error:', error);
+                    console.error('Error:', error);
+                    errorMessage.textContent = 'Payment failed. Please try again.';
                     errorMessage.style.display = 'block';
-                    paymentBtn.disabled = false;
                 } finally {
                     loading.style.display = 'none';
                 }

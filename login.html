@@ -103,9 +103,32 @@
             justify-content: center;
             gap: 10px;
         }
+
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .loading-text {
+            color: white;
+            font-size: 18px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Processing your request...</div>
+    </div>
+
     <div class="auth-container">
         <h2 style="text-align: center; margin-bottom: 20px;">Login to BugBusters</h2>
         <form class="auth-form" id="loginForm">
@@ -131,51 +154,49 @@
     </div>
 
     <script>
-        document.getElementById('loginForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            const loadingOverlay = document.getElementById('loadingOverlay');
             
-            const loginButton = document.getElementById('loginButton');
-            const loginSpinner = document.getElementById('loginSpinner');
-            const errorMessage = document.getElementById('errorMessage');
-            
-            // Show loading state
-            loginButton.disabled = true;
-            loginSpinner.style.display = 'block';
-            errorMessage.textContent = '';
+            loginForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                // Show loading overlay
+                loadingOverlay.style.display = 'flex';
+                
+                const formData = {
+                    userName: document.getElementById('userName').value,
+                    password: document.getElementById('password').value
+                };
 
-            const userData = {
-                userName: document.getElementById('userName').value,
-                password: document.getElementById('password').value
-            };
+                try {
+                    const response = await fetch('https://bugbusters-backend-jyeu.onrender.com/public/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formData)
+                    });
 
-            try {
-                const response = await fetch('https://bugbusters-backend-jyeu.onrender.com/public/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(userData)
-                });
-
-                if (response.ok) {
-                    const user = await response.json();
-                    localStorage.setItem('user', JSON.stringify(user));
-                    window.location.href = 'index.html';
-                } else if (response.status === 403) {
-                    errorMessage.textContent = 'Invalid password. Please try again.';
-                } else if (response.status === 404) {
-                    errorMessage.textContent = 'Username not found. Please sign up.';
-                } else {
-                    errorMessage.textContent = 'Login failed. Please try again.';
+                    if (response.status === 202) {
+                        const user = await response.json();
+                        localStorage.setItem('user', JSON.stringify(user));
+                        window.location.href = 'index.html';
+                    } else if (response.status === 403) {
+                        alert('Incorrect password. Please try again.');
+                    } else if (response.status === 404) {
+                        alert('Username not found. Please sign up first.');
+                    } else {
+                        alert('Login failed. Please try again.');
+                    }
+                } catch (error) {
+                    console.error('Error during login:', error);
+                    alert('An error occurred. Please try again.');
+                } finally {
+                    // Hide loading overlay
+                    loadingOverlay.style.display = 'none';
                 }
-            } catch (error) {
-                console.error('Error:', error);
-                errorMessage.textContent = 'An error occurred. Please try again.';
-            } finally {
-                // Hide loading state
-                loginButton.disabled = false;
-                loginSpinner.style.display = 'none';
-            }
+            });
         });
     </script>
 </body>

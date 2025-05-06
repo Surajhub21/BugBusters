@@ -492,29 +492,71 @@
 
                 container.innerHTML = `
                     <div class="services-grid">
-                        ${services.map(service => `
-                            <div class="service-card">
-                                <img src="${service.pestImageUrl}" alt="${service.pestName}" class="service-image">
-                                <div class="service-content">
-                                    <h3 class="service-title">${service.pestName}</h3>
-                                    <p class="service-description">${service.pestDes}</p>
-                                    <div class="service-actions">
-                                        <a href="service-booking.html?service=${service.id}" class="book-btn">
-                                            Book Service
-                                        </a>
-                                        <div class="qr-code" onclick="showQrCode('${service.id}', '${service.pestName}')">
-                                            <img src="" alt="QR Code" id="qr-${service.id}">
+                        ${services.map(service => {
+                            // Extract the ID from the service object and ensure it's a string
+                            const serviceId = service.id ? service.id.toString() : '';
+                            // Create a safe URL with the service ID
+                            const bookingUrl = `service-booking.html?service=${encodeURIComponent(serviceId)}`;
+                            return `
+                                <div class="service-card" data-service="${service.pestName}">
+                                    <img src="${service.pestImageUrl}" alt="${service.pestName}" class="service-image">
+                                    <div class="service-content">
+                                        <h3 class="service-title">${service.pestName}</h3>
+                                        <p class="service-description">${service.pestDes}</p>
+                                        <div class="service-actions">
+                                            <a href="${bookingUrl}" class="book-btn">
+                                                Book Service
+                                            </a>
+                                            <div class="qr-code" onclick="showQrCode('${serviceId}', '${service.pestName}')">
+                                                <img src="" alt="QR Code" id="qr-${serviceId}">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        `).join('')}
+                            `;
+                        }).join('')}
                     </div>
                 `;
 
                 // Generate QR codes for each service
                 services.forEach(service => {
-                    generateQrCode(service.id, service.pestName);
+                    const serviceId = service.id ? service.id.toString() : '';
+                    generateQrCode(serviceId, service.pestName);
+                });
+
+                // Handle service card clicks
+                document.querySelectorAll('.service-card').forEach(card => {
+                    const bookBtn = card.querySelector('.book-btn');
+                    bookBtn.addEventListener('click', function(e) {
+                        e.preventDefault(); // Prevent default link behavior
+                        
+                        const serviceType = card.getAttribute('data-service');
+                        const selectedPestName = card.querySelector('.service-title').textContent;
+                        
+                        console.log('Service Card Clicked - Raw Data:', {
+                            serviceType,
+                            selectedPestName,
+                            type: typeof selectedPestName
+                        });
+                        
+                        if (!selectedPestName) {
+                            console.error('No pest name selected');
+                            alert('Please select a pest type first');
+                            return;
+                        }
+
+                        // Store service data in localStorage
+                        const serviceData = {
+                            serviceType: serviceType,
+                            pestName: selectedPestName
+                        };
+                        console.log('Storing in localStorage:', serviceData);
+                        localStorage.setItem('serviceData', JSON.stringify(serviceData));
+                        
+                        // Navigate to booking page with the pest name
+                        console.log('Navigating with pest name:', selectedPestName);
+                        window.location.href = `service-booking.html?service=${encodeURIComponent(selectedPestName)}`;
+                    });
                 });
             } catch (error) {
                 console.error('Error loading services:', error);
@@ -530,7 +572,7 @@
 
         function generateQrCode(serviceId, serviceName) {
             const qr = qrcode(0, 'M');
-            const bookingUrl = `${window.location.origin}/service-booking.html?service=${serviceId}`;
+            const bookingUrl = `${window.location.origin}/service-booking.html?service=${encodeURIComponent(serviceId)}`;
             qr.addData(bookingUrl);
             qr.make();
             
@@ -558,7 +600,7 @@
             const qrContainer = document.getElementById('modalQrCode');
             
             const qr = qrcode(0, 'M');
-            const bookingUrl = `${window.location.origin}/service-booking.html?service=${serviceId}`;
+            const bookingUrl = `${window.location.origin}/service-booking.html?service=${encodeURIComponent(serviceId)}`;
             qr.addData(bookingUrl);
             qr.make();
             

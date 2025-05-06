@@ -247,6 +247,104 @@
                 font-size: 0.8rem;
             }
         }
+
+        .pests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .pest-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .pest-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .pest-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .pest-content {
+            padding: 1rem;
+        }
+
+        .pest-content h3 {
+            margin: 0 0 0.5rem 0;
+            color: #333;
+        }
+
+        .pest-content p {
+            margin: 0 0 1rem 0;
+            color: #666;
+        }
+
+        .view-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .view-btn:hover {
+            background: #45a049;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: relative;
+            background: white;
+            margin: 10% auto;
+            padding: 2rem;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 8px;
+        }
+
+        .pest-detail-image {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .close-btn:hover {
+            color: #333;
+        }
     </style>
     <script>
         // Add mobile menu toggle functionality
@@ -257,9 +355,116 @@
                 this.classList.toggle('active');
             });
         });
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            let currentService = null; // Store the service data globally
+            
+            // Get service name from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const serviceName = urlParams.get('service');
+            console.log('Service Name from URL:', serviceName);
+            
+            if (!serviceName) {
+                alert('No service selected. Please select a service first.');
+                window.location.href = 'services.html';
+                return;
+            }
+            
+            // Show loading overlay
+            loadingOverlay.style.display = 'flex';
+            
+            try {
+                // Fetch the specific service data using the pest name
+                const apiUrl = `https://bugbusters-backend-jyeu.onrender.com/pests/id/${encodeURIComponent(serviceName)}`;
+                console.log('Fetching from API URL:', apiUrl);
+                
+                const response = await fetch(apiUrl);
+                console.log('API Response Status:', response.status);
+                
+                const responseText = await response.text();
+                console.log('Raw API Response:', responseText);
+                
+                let service;
+                try {
+                    service = JSON.parse(responseText);
+                } catch (parseError) {
+                    console.error('Error parsing JSON response:', parseError);
+                    throw new Error('Invalid response format from server');
+                }
+                
+                if (!service || Object.keys(service).length === 0) {
+                    throw new Error('No service data received');
+                }
+                
+                console.log('Parsed Service Data:', service);
+                currentService = service; // Store the service data
+                
+                // Store service data for later use
+                const serviceData = {
+                    serviceId: service.id || serviceName,
+                    serviceName: service.pestName || serviceName,
+                    serviceDescription: service.pestDes || '',
+                    serviceImageUrl: service.pestImageUrl || '',
+                    serviceYtLink: service.ytLink || ''
+                };
+                console.log('Storing service data:', serviceData);
+                localStorage.setItem('serviceData', JSON.stringify(serviceData));
+                
+                // Update the service details in the UI
+                const serviceTitle = document.querySelector('.service-title');
+                const serviceDescription = document.querySelector('.service-description');
+                const serviceImage = document.querySelector('.service-image');
+                
+                if (serviceTitle) serviceTitle.textContent = service.pestName;
+                if (serviceDescription) serviceDescription.textContent = service.pestDes;
+                if (serviceImage) serviceImage.src = service.pestImageUrl;
+                
+                // Handle service card clicks
+                document.querySelectorAll('.service-card').forEach(card => {
+                    const bookBtn = card.querySelector('.book-btn');
+                    bookBtn.addEventListener('click', function() {
+                        const serviceType = card.getAttribute('data-service');
+                        const price = card.querySelector('.price').textContent;
+                        
+                        // Store service data in localStorage
+                        const bookingData = {
+                            serviceType: serviceType,
+                            price: price,
+                            pestId: currentService.id || serviceName,
+                            pestName: currentService.pestName,
+                            pestDescription: currentService.pestDes,
+                            pestImageUrl: currentService.pestImageUrl,
+                            pestYtLink: currentService.ytLink
+                        };
+                        localStorage.setItem('bookingData', JSON.stringify(bookingData));
+                        
+                        // Navigate to booking details page
+                        window.location.href = 'booking-details.html';
+                    });
+                });
+                
+            } catch (error) {
+                console.error('Error fetching service:', error);
+                console.error('Error details:', {
+                    message: error.message,
+                    stack: error.stack
+                });
+                alert('Failed to load service. Please try again later.');
+                window.location.href = 'services.html';
+            } finally {
+                // Hide loading overlay
+                loadingOverlay.style.display = 'none';
+            }
+        });
     </script>
 </head>
 <body class="service-booking-page">
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading services...</div>
+    </div>
+
     <header>
         <a href="index.html">
             <h1 id="logo"><i class="fa-solid fa-bug"></i> Help Me Pest Control</h1>
@@ -279,7 +484,7 @@
         <section id="booking-section">
             <h2>Choose Your Service Plan</h2>
             <div class="service-cards">
-                <div class="service-card">
+                <div class="service-card" data-service="one-time">
                     <h4>One-Time Treatment</h4>
                     <p>Perfect for immediate pest problems</p>
                     <ul>
@@ -289,9 +494,9 @@
                         <li>30-day guarantee</li>
                     </ul>
                     <p class="price">From ₹99</p>
-                    <button class="book-btn" onclick="window.location.href='booking-details.html?serviceType=OneDay'">Book Now</button>
+                    <button class="book-btn">Book Now</button>
                 </div>
-                <div class="service-card">
+                <div class="service-card" data-service="monthly">
                     <h4>Monthly Plan</h4>
                     <p>Regular maintenance and prevention</p>
                     <ul>
@@ -302,9 +507,9 @@
                         <li>60-day guarantee</li>
                     </ul>
                     <p class="price">From ₹79/month</p>
-                    <button class="book-btn" onclick="window.location.href='booking-details.html?serviceType=Monthly'">Book Now</button>
+                    <button class="book-btn">Book Now</button>
                 </div>
-                <div class="service-card">
+                <div class="service-card" data-service="quarterly">
                     <h4>Quarterly Plan</h4>
                     <p>Seasonal protection package</p>
                     <ul>
@@ -315,7 +520,7 @@
                         <li>90-day guarantee</li>
                     </ul>
                     <p class="price">From ₹199/quarter</p>
-                    <button class="book-btn" onclick="window.location.href='booking-details.html?serviceType=Quarterly'">Book Now</button>
+                    <button class="book-btn">Book Now</button>
                 </div>
             </div>
         </section>
@@ -359,6 +564,22 @@
                 </div>
             </div>
         </section>
+
+        <div id="bookingsContainer"></div>
+
+        <!-- Container for pests -->
+        <div id="pestsContainer" class="pests-grid"></div>
+
+        <!-- Modal for pest details -->
+        <div id="pestModal" class="modal">
+            <div id="pestModalContent" class="modal-content">
+                <div class="service-details">
+                    <h2 class="service-title"></h2>
+                    <img class="service-image" src="" alt="Service Image">
+                    <p class="service-description"></p>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer>
